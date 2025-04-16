@@ -56,7 +56,7 @@ def gen_modelnet_id(root):
 class ShapeNetDataset(data.Dataset):
     def __init__(self,
                  root,
-                 npoints=2500,
+                 npoints=10000,
                  classification=False,
                  class_choice=None,
                  split='train',
