@@ -56,7 +56,7 @@ def gen_modelnet_id(root):
 class ShapeNetDataset(data.Dataset):
     def __init__(self,
                  root,
-                 npoints=10000,
+                 npoints=2500,
                  classification=False,
                  class_choice=None,
                  split='train',
@@ -110,7 +110,7 @@ class ShapeNetDataset(data.Dataset):
         fn = self.datapath[index]
         cls = self.classes[self.datapath[index][0]]
         point_set = np.loadtxt(fn[1]).astype(np.float32)
-        seg = np.loadtxt(fn[2]).astype(np.int64)
+        seg = np.loadtxt(fn[2]).astype(np.int64)+1
         #print(point_set.shape, seg.shape)
 
         choice = np.random.choice(len(seg), self.npoints, replace=True)
@@ -196,7 +196,7 @@ if __name__ == '__main__':
     datapath = sys.argv[2]
 
     if dataset == 'shapenet':
-        d = ShapeNetDataset(root = datapath, class_choice = ['Chair'])
+        d = ShapeNetDataset(root = datapath, class_choice = ['Statue_3'])
         print(len(d))
         ps, seg = d[0]
         print(ps.size(), ps.type(), seg.size(),seg.type())
